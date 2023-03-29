@@ -21,9 +21,15 @@
  *---------------------------------------------------------------------------*/
 
 #include "main.h"
-#include <stdio.h>
 #include "cmsis_os2.h"                  // ::CMSIS:RTOS2
 
+#include "RTE_Components.h"
+#ifdef RTE_Compiler_EventRecorder
+#include "EventRecorder.h"
+#endif
+
+#include <stdio.h>
+#include <stdlib.h>
 
 /*---------------------------------------------------------------------------
  * Application main thread
@@ -33,13 +39,37 @@ static int count = 0;
 
 static void app_main (void *argument) {
   (void)argument;
-  
+
+  printf("Starting ...\r\n");
+
+#ifdef RTE_Compiler_EventRecorder
+  printf("... using Event Recorder\r\n");
+  EventRecorderClockUpdate();
+  EventStartC (0);
+#endif
+
+  printf("\r\n");
+
   while (1)  {
+#ifdef RTE_Compiler_EventRecorder
+    EventStartBv(0, count, 0);
+#endif
     printf ("Hello World %d\r\n", count);
-    if (count > 100) printf ("\x04");  // EOT (0x04) stops simulation
+#ifdef RTE_Compiler_EventRecorder
+    EventStopB(0);
+#endif
+
+    if (count > 100) break;
     count++;
     osDelay (1000);
   }
+
+#ifdef RTE_Compiler_EventRecorder
+  EventStopC(0);
+#endif
+
+  printf("\r\nFinished\r\n\x04"); // EOT (0x04) stops simulation
+  exit(0);
 }
 
 /*---------------------------------------------------------------------------

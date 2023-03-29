@@ -25,6 +25,9 @@
 
 #include "main.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+
 extern int stdio_init (void);
 
 int main (void) {
@@ -42,4 +45,9 @@ int main (void) {
   osKernelStart();                      // Start thread execution
 
   for (;;) {}
+}
+
+void HardFault_Handler(void) {
+  printf("\r\n=== PANIC ===\r\n");
+  exit(0);
 }

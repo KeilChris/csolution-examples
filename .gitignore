@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+EventRecorder.log
+.clangd
+*.cbuild-idx.yml
+*.cbuild.yml
+*.cprj
+**/out/**/*
+**/tmp/**/*
+**/RTE/_**/*
+*.base@*
