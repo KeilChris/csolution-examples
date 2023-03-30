@@ -68,7 +68,7 @@ static void app_main (void *argument) {
   EventStopC(0);
 #endif
 
-  printf("\r\nFinished\r\n\x04"); // EOT (0x04) stops simulation
+  printf("\r\nFinished\r\n\x04");
   exit(0);
 }
 

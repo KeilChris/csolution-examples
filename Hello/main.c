@@ -33,7 +33,6 @@ extern int stdio_init (void);
 int main (void) {
   stdio_init();                         // Initialize stdio
 
-
 #if defined(RTE_Compiler_EventRecorder) && \
     (defined(__MICROLIB) || \
     !(defined(RTE_CMSIS_RTOS2_RTX5) || defined(RTE_CMSIS_RTOS2_FreeRTOS)))
@@ -44,10 +43,10 @@ int main (void) {
   app_initialize();                     // Initialize application
   osKernelStart();                      // Start thread execution
 
-  for (;;) {}
+  return 1;
 }
 
 void HardFault_Handler(void) {
-  printf("\r\n=== PANIC ===\r\n");
-  exit(0);
+  printf("\r\n=== PANIC ===\r\n\x04");
+  exit(1);
 }
