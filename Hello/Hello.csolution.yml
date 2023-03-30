@@ -6,8 +6,7 @@ solution:
   packs:
     - pack: ARM::CMSIS
     - pack: ARM::CMSIS-View                   # for Event Recorder
-    - pack: ARM::ARM_Compiler                 # for retargeting stdout to UART
-    - pack: ARM::GCC_Compiler                 # for retargeting stdout to UART
+    - pack: ARM::CMSIS-Compiler               # for retargeting stdout to UART
     - pack: ARM::V2M_MPS3_SSE_300_BSP@1.2.0   # optional packs can specify a version
     - pack: Keil::V2M-MPS2_CMx_BSP
 
